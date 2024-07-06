@@ -15,6 +15,7 @@ import Register from './pages/Register';
 import Single from './pages/Single';
 import Home from './pages/Home';
 import Write from './pages/Write.js';
+import "./style.scss"
  
 
 
@@ -77,8 +78,14 @@ function App() {
   return (
  <div>
 
+  <div className="App">
+    <div className="container">
 
-  <RouterProvider router={router} />
+    <RouterProvider router={router} />
+
+
+    </div>
+  </div>
  </div>
 
   );

@@ -1,0 +1,84 @@
+.App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .container{
+
+     
+
+      
+      .footer{
+
+        background-color: #333;
+        color: white;
+        padding: 20px 0;
+
+
+        .footer-contetnt{
+
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          padding: 0 30px;
+
+
+
+          .footer-section{
+            flex: 1;
+            margin: 10px;
+            h2 {
+
+              margin-bottom: 30px;
+            }
+
+            p, ul ,form{
+              margin: 0;
+            }
+
+            ul{
+              list-style: none;
+              padding: 0;
+            }
+
+            li{
+              margin-bottom: 5px;
+              a{
+
+                color: white;
+                text-decoration: none;
+               
+                &:hover{
+
+                  text-decoration: underline;
+                }
+              
+              }
+
+            }
+
+          }
+
+          .social-icons{
+            color: white;
+            margin-right: 10px;
+            font-size: 1.2rem;
+
+          }
+        }
+
+
+       
+
+
+
+      }
+
+
+      
+    }
+    
+  
+ 
+  }
+  
