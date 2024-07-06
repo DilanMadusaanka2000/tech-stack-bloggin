@@ -21,12 +21,15 @@ export default function Nav() {
               <p className="nav-link" href="/?cat=cloud">Cloud Computing</p>
 
             </div>
-            <div className="d-flex">
-            <button className="btn  me-2" style={{ textDecoration: 'none', color: 'inherit' }}>Write</button>
+            <div className="d-flex"> 
+              <Link to={'/write'}>
+              <button className="btn  me-2" style={{ textDecoration: 'none', color: 'black' }}>Write</button>
+              
+              </Link>
 
 
-              <button className="btn btn-outline-primary me-2" style={{ textDecoration: 'none', color: 'inherit' }}>Register</button>
-              <button className="btn btn-outline-success" style={{ textDecoration: 'none', color: 'inherit' }}>Login</button>
+              <button className="btn btn-outline-primary me-2" style={{ textDecoration: 'none', color: 'inherit' }}>Log in</button>
+              <button className="btn btn-outline-success" style={{ textDecoration: 'none', color: 'inherit' }}>Logout</button>
             </div>
           </div>
         </div>

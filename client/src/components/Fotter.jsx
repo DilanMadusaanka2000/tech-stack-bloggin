@@ -8,30 +8,22 @@ export default function Fotter() {
       <footer className="footer">
         <div className="footer-contetnt">
           <div className="footer-section about">
-            <h2>about</h2>
-            <p>
+            <h2>bout</h2>
+            <p style={{justifyContent:"center"}}>
             Tech Blog is a platform where we share the latest trends, tutorials, and insights in the world of technology.
 
             </p>
           </div>
 
           <div className="footer-section contact">
-            <h2>Contact Ua</h2>
+            <h2>Contact Us</h2>
             <p>Email:madusankadilan226@gmail.com</p>
             <p>Phone: +94 774630350</p>
             <p>Address: Matara Sri Lanaka</p>
 
           </div>
 
-          <div className="footer-section social">
-          <h2>Follow Us</h2>
-          <div className="social-icons">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
-          </div>
-        </div>
+         
 
 
 
