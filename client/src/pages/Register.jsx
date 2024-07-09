@@ -12,6 +12,8 @@ export default function Register() {
     password:"",
   })
 
+  const [err , setErr] = useState(null)
+  const navigate = useNavigate()
 //we can input multiple input in one function
  const handleChnage = e=>{
 
@@ -27,9 +29,11 @@ export default function Register() {
    try 
    {
     await axios.post("auth/register",inputs)
+    navigate("/login")
     
    } catch (err) {
-    console.log(err)
+
+    setErr(err.response.data);
     
    }
      
@@ -49,7 +53,7 @@ export default function Register() {
  
         <button onClick={handleSubmit}> Register</button>
 
-        <p>invalid username or password</p>
+        {err &&<p>{err}</p>}
         <span>Do have account ? <Link to ="/login">Login</Link> </span>
       </form>
 

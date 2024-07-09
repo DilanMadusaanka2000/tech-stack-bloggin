@@ -1,8 +1,43 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
+import axios from "axios";
+
 
 
 export default function Login() {
+
+  const [inputs , setInputs] = useState ({
+    username:"",
+    password:"",
+  })
+
+  const [err , setErr] = useState(null)
+  const navigate = useNavigate()
+//we can input multiple input in one function
+ const handleChnage = e=>{
+
+    setInputs(prev=>({...prev, [e.target.name]:e.target.value}))
+
+ }
+
+
+ const handleSubmit= async (e)=>{
+
+   e.preventDefault();
+
+   try 
+   {
+    await axios.post("auth/login",inputs)
+    navigate("/")
+    
+   } catch (err) {
+
+    setErr(err.response.data);
+    
+   }
+     
+ }
+
   return (
     <div>
 
@@ -10,11 +45,11 @@ export default function Login() {
      <div className="auth">
       <h1>Login</h1>
       <form action="">
-        <input type="text" placeholder='username' name='username'/>
-        <input type="password" placeholder='password' name='password' />
+        <input type="text" placeholder='username' name='username'onChange={handleChnage}/>
+        <input type="password" placeholder='password' name='password' onChange={handleChnage}/>
 
-        <button> Login</button>
-        <p>invalid username or password</p>
+        <button onClick={handleSubmit}> Login</button>
+        {err &&<p>{err}</p>}
         <span>Don't have account ? <Link to ="/register">Register</Link> </span>
       </form>
 
