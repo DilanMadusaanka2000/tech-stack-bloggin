@@ -24,6 +24,7 @@ export const register = (req, res) => {
   });
 };
 
+
 export const login = (req, res) => {
   // check user is login 
 
@@ -42,11 +43,11 @@ export const login = (req, res) => {
     
 
     const token = jwt.sign({id:data[0].id}, "jwtkey");
-    const {password, ...other} = data[0]
+    const {password, ...other} = data[0];    //separet password from other data
 
     res.cookie("access_token",token ,{
-      httpOnly:true
-    }).status(200).json(data[other])
+      httpOnly: true,
+    }).status(200).json(other)   //object 
   }) 
 
 

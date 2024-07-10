@@ -27,22 +27,7 @@ export default function Fotter() {
 
 
 
-          <div className="footer-section links">
-            <h2>Links</h2>
-            <ul>
-
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/">AI</Link></li>
-            <li><Link to="/">Mobile Technology</Link></li>
-            <li><Link to="/">Cloud Technology</Link></li>
-            <li><Link to="/">Web Technology</Link></li>
-
-
-
-
-            </ul>
-          </div>
-
+         
           
 
         </div>

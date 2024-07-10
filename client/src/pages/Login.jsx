@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import axios from "axios";
+import { useContext } from 'react';
+import { AuthContext } from '../context/authContext';
 
 
 
@@ -9,16 +11,22 @@ export default function Login() {
   const [inputs , setInputs] = useState ({
     username:"",
     password:"",
-  })
+  });
+
 
   const [err , setErr] = useState(null)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+ 
+  //get current user 
+  const {login} = useContext(AuthContext);
 //we can input multiple input in one function
- const handleChnage = e=>{
 
-    setInputs(prev=>({...prev, [e.target.name]:e.target.value}))
 
- }
+ const handleChnage = (e)=>{
+
+    setInputs((prev)=>({...prev, [e.target.name]:e.target.value}));
+
+ };
 
 
  const handleSubmit= async (e)=>{
@@ -27,7 +35,8 @@ export default function Login() {
 
    try 
    {
-    await axios.post("auth/login",inputs)
+    
+    await login(inputs)
     navigate("/")
     
    } catch (err) {
