@@ -77,9 +77,9 @@ const handleDelete = async () =>{
 
 
           { currentUser.username === post.username &&
-                <div className="edit">
+                <div className="edit"> 
                   
-                  <Link to={`/write?edit=2`}>
+                  <Link to={`/write?edit=2`} state={post}>
                   <img src={Edit} alt="" />
                   
                   </Link>

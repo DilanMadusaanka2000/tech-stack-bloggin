@@ -2,16 +2,20 @@ import React , { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from "axios";
+import { useLocation , useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 
 
 function Write(){
-
-    const [value , setValue] = useState('');
-    const [title, setTitle] = useState('');
+    
+    const state = useLocation().state
+    const [value , setValue] = useState(state?.title ||"");
+    const [title, setTitle] = useState(state?.desc||"");
     const [file, setFile] = useState(null);
-    const [cat, setCat] = useState('');
-
+    const [cat, setCat] = useState(state?.cat ||"");
+   
+  const navigate = useNavigate();
 
     
     const upload = async () => {
@@ -22,7 +26,7 @@ function Write(){
           return res.data;
         } catch (err) {
           console.log(err);
-        }
+        } 
       };
       
 
@@ -30,9 +34,25 @@ function Write(){
     const handleClick = async e => {
       
         e.preventDefault()
-        const imgUrl = upload()
+        const imgUrl = await upload() 
 
         try {
+
+            
+            state  ? await axios.put(`/posts/${state.id}`,  {
+                title,
+                desc: value,
+                cat,
+                img: file ? imgUrl : '',
+              })
+            : await axios.post(`/posts/`, {
+                title,
+                desc: value,
+                cat,
+                img: file ? imgUrl : '',
+                date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
+              });
+            navigate('/');
             
         } catch (err) {
 
@@ -48,7 +68,7 @@ function Write(){
      
     <div className='add'>
         <div className='content'>
-            <input type="text" placeholder='Title' onChange={e=>setTitle(e.target.value)} />
+            <input type="text" value={title} placeholder='Title' onChange={e=>setTitle(e.target.value)} />
             <ReactQuill theme='snow' value={value} onChange={setValue}/>
 
         </div>
@@ -78,17 +98,17 @@ function Write(){
             <div className='item'>
                 <h1>Category</h1>
 
-                <input type='radio' name='cat' id='science' onChange={e=>setCat(e.target.value)} />
-                <label htmlFor='mobile'>Mobile</label>
+                <input type='radio' checked ={cat ==="science"}  name='cat' id='science' value='science' onChange={e=>setCat(e.target.value)} />
+                <label htmlFor='mobile'>science</label>
 
-                <input type='radio' name='cat' id='tec'  onChange={e=>setCat(e.target.value)}/>
-                <label htmlFor='cloud'>Cloud</label>
+                <input type='radio'  checked ={cat ==="tec"} name='cat' id='tec' value='tec' onChange={e=>setCat(e.target.value)}/>
+                <label htmlFor='cloud'>Texhnology</label>
 
-                <input type='radio' name='cat' id='art'  onChange={e=>setCat(e.target.value)}/>
-                <label htmlFor='ai'>AI</label>
+                <input type='radio' checked ={cat ==="art"}  name='cat' id='art'value='art'  onChange={e=>setCat(e.target.value)}/>
+                <label htmlFor='ai'>Art</label>
 
-                <input type='radio' name='cat' id='design' onChange={e=>setCat(e.target.value)} />
-                <label htmlFor='machine'>Machine</label>
+                <input type='radio'  checked ={cat ==="design"} name='cat' id='design' value='design' onChange={e=>setCat(e.target.value)} />
+                <label htmlFor='machine'>Design</label>
 
             </div>
 
