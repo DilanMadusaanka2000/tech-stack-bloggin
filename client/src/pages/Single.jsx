@@ -86,7 +86,7 @@ const handleDelete = async () =>{
 
                   <img onClick={handleDelete} src={Delete} alt="" />
                     
-                </div>}
+                </div> }
 
           
         </div>
@@ -103,7 +103,7 @@ const handleDelete = async () =>{
 
 
       
-      <Menu />
+      <Menu  cat={post.cat}/>
 
        
       </div>
