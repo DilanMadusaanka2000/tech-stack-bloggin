@@ -1,41 +1,98 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Edit from '../img/edit.png'
 import Delete from '../img/delete.png'
-import { Link } from 'react-router-dom';
-import Menu from '../components/Menu'
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Menu from '../components/Menu';
+import axios from "axios";
+import moment from "moment";
+import { AuthContext } from '../context/authContext';
+
+
 
 
 export default function Single() {
+  
+  const [post , setPost] = useState({});
+
+  const location = useLocation()
+  const postId = location.pathname.split("/")[2] 
+  const {currentUser} = useContext(AuthContext);
+  const navigate  = useNavigate();
+
+  useEffect(() =>{
+
+    const fetchData = async () =>{
+
+      try {
+
+        const res = await axios.get(`/posts/${postId}`)
+
+        setPost(res.data);
+
+        
+      } catch (err) {
+
+        console.log(err)
+        
+      }
+    };
+    fetchData();
+  }, [postId]) ;
+
+
+
+//delet post
+
+const handleDelete = async () =>{
+
+  try {
+
+     await axios.delete(`/posts/${postId}`)    //get delete  req
+ 
+     navigate("/")
+     
+  } catch (err) {
+
+    console.log(err)
+    
+  }
+}
+
+
+
   return (
     <>
 
       <div className="single">
       <div className="content">
 
-        <img src="https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" />
+        <img src={post?.img} alt="" />
         <div className="user">
-          <img src="https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" />
-          <div className="info">
-            <span>Jhon</span>
-            <p>Posted 2 days ago</p>
-          </div>
-          
-          <div className="edit">
-           
-            <Link to={`/write?edit=2`}>
-            <img src={Edit} alt="" />
-            
-            </Link>
+          <img src={post.userImg} alt="" />
 
-            <img src={Delete} alt="" />
-              
-          </div>
+        { post.userImg && <div className="info">
+            <span>{post.username }</span>
+            <p>Posted {moment(post.date).fromNow()}</p>
+          </div>}
+
+
+          { currentUser.username === post.username &&
+                <div className="edit">
+                  
+                  <Link to={`/write?edit=2`}>
+                  <img src={Edit} alt="" />
+                  
+                  </Link>
+
+                  <img onClick={handleDelete} src={Delete} alt="" />
+                    
+                </div>}
 
           
         </div>
 
-        <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, nisi et commodo volutpat, eros turpis vehicula urna, eget convallis nisl lectus vel arcu. Curabitur blandit ultrices orci, at pharetra felis sollicitudin sit amet. Maecenas tristique justo vel sem bibendum, sed venenatis lacus sollicitudin. Vivamus bibendum orci in augue congue, in interdum metus condimentum. Integer nec orci ut eros consectetur scelerisque. Sed malesuada libero vitae mauris venenatis, sit amet suscipit nisi dapibus. Nulla facilisi. Quisque vestibulum felis sit amet ligula pretium, ac cursus enim fringilla. Fusce ultricies urna non purus dignissim tempor.</p>
+        <h1> {post.title} </h1>
+          <p>{post.desc}</p>
           
       </div>
       

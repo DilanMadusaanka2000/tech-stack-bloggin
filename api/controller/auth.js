@@ -58,4 +58,12 @@ export const login = (req, res) => {
 
 export const logout = (req, res) => {
   // Implement logout functionality
+   
+   res.clearCookie("access_token",{
+
+    sameSite:"none",
+    secure:true
+
+   }).status(200).json("User has bee logut");
+
 };

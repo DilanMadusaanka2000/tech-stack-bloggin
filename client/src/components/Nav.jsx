@@ -15,17 +15,16 @@ export default function Nav() {
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
+
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav me-auto">
-              <p className="nav-link active" aria-current="page" href="/">Home</p>
-              <p className="nav-link" href="/?cat=web">web Dev</p>
-              <p className="nav-link" href="/?cat=mobile">mobile Dev</p>
-              <p className="nav-link" href="/?cat=ai">AI</p>
-              <p className="nav-link" href="/?cat=cloud">Cloud Computing</p>
-              <Link to ={'/write'}>
-               <p className="nav-link" style = {{ textDecoration:'none', color: 'black' }} >Write  </p>
+            <Link className="nav-link active" to="/" aria-current="page">Home</Link>
+              <Link className="nav-link" to="/?cat=science">Science</Link>
+              <Link className="nav-link" to="/?cat=tec">Technology</Link>
+              <Link className="nav-link" to="/?cat=art">Art</Link>
+              <Link className="nav-link" to="/?cat=design">Design</Link>
+              <Link className="nav-link" to="/write" style={{ textDecoration: 'none', color: 'black' }}>Write</Link>
 
-              </Link>
 
              {currentUser && <p className="nav-link" > {currentUser?.username} </p>} 
 
@@ -34,9 +33,10 @@ export default function Nav() {
             </div>
             <div className="d-flex"> 
             
-
-              <button className="btn btn-outline-primary me-2" style={{ textDecoration: 'none', color: 'inherit' }}>Log in</button>
-              <button className="btn btn-outline-success" style={{ textDecoration: 'none', color: 'inherit' }}>Logout</button>
+            {currentUser ? ( <button className="btn btn-outline-success" style={{ textDecoration: 'none', color: 'inherit' }} onClick={logout}>Logout</button>):( <Link to ="/login">  <button className="btn btn-outline-primary me-2" style={{ textDecoration: 'none', color: 'inherit' }}>Log in</button>  </Link>) }
+              
+            
+            
             </div>
           </div>
         </div>
