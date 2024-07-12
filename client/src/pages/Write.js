@@ -52,7 +52,7 @@ function Write(){
                 img: file ? imgUrl : '',
                 date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
               });
-            navigate('/');
+              navigate('/');
             
         } catch (err) {
 

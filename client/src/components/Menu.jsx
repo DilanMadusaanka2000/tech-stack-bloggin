@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation , Link } from 'react-router-dom';
 import axios from "axios";
 
 
@@ -71,8 +71,11 @@ export default function Menu({cat}) {
     {posts.map((post) =>(
       <div className="post" key={post.id}>
 
-        <img src={post.img} alt="" />
-        <h2>{post.title}</h2>
+        <img src={`../upload/${post?.img}`} alt="" />
+        <Link className='link'style={{ textDecoration: 'none' }} to={`/post/${post.id}`}>
+                
+                <h1>{post.title}</h1>
+               </Link>
         <button>Reade more</button>
         
 
